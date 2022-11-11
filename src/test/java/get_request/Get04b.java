@@ -20,7 +20,7 @@ public class Get04b extends RestfulBaseUrl {
 
      */
     @Test
-    public void test04(){
+    public void get04(){
         //set the url
         spec.pathParam("first","booking").queryParams("firstname","Almedin","lastname","Alikadic");
         //expected data

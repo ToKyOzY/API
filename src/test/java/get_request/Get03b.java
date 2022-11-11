@@ -33,7 +33,7 @@ public class Get03b extends ReqresBaseUrl {
     //Do Asssertions
 
     @Test
-    public void test03(){
+    public void get03(){
         //set the url
         spec.pathParams("first","users","second",2);
 
