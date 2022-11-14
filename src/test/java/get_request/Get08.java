@@ -3,6 +3,7 @@ package get_request;
 import base_url.JsonplaceholderBaseUrl;
 import io.restassured.response.Response;
 import org.junit.Test;
+import text_data.JsonPlaceHolderTestData;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -70,4 +71,36 @@ public class Get08 extends JsonplaceholderBaseUrl {
 
 
     }
+
+    //Dinamik yontem
+    @Test
+    public void get08b() {
+        //Set the url
+        spec.pathParams("first","todos","second",2);
+
+        //Set the expected data ==> Payload
+        JsonPlaceHolderTestData objJsonPlcHldr= new JsonPlaceHolderTestData();
+        Map<String,Object> expectedData= objJsonPlcHldr.expectedDataMap(1,"quis ut nam facilis et officia qui",false);
+        System.out.println(expectedData);
+
+        //send the request and get the response
+        Response response=given().spec(spec).when().get("/{first}/{second}");
+        response.prettyPrint();
+
+        //Do Asssertions
+        Map<String,Object> actualData=response.as(HashMap.class);//De-Serialization ==> Json'i Java'ya cevirdim
+        System.out.println("actualData = " + actualData);
+        assertEquals(expectedData.get("userId"),actualData.get("userId"));
+        assertEquals(expectedData.get("title"),actualData.get("title"));
+        assertEquals(expectedData.get("completed"),actualData.get("completed"));
+        assertEquals("1.1 vegur",response.header("Via"));
+        assertEquals("cloudflare",response.header("Server"));
+        assertEquals(200,response.statusCode());
+
+
+
+    }
+
+
+
 }
