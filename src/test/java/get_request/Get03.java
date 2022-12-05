@@ -48,7 +48,7 @@ public class Get03 extends JsonplaceholderBaseUrl {
                 body("completed",equalTo(false)).
                 body("userId",equalTo(2));
 
-        //2. YOl: Sadece body icerisinde gecerl bir (soft Assert)
+        //2. YOl: Sadece body icerisinde gecerl bir
         response.then().
                 assertThat().
                 statusCode(200).contentType("application/json").
